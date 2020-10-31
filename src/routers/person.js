@@ -3,10 +3,10 @@ const Person = require('../models/Person')
 
 const router = express.Router()
 
-router.get('/persons', async(req, res) => {
+router.post('/persons', async(req, res) => {
   try {
     let params = {}
-    Object.assign(params, req.body.name && {name: {"$regex": req.body.name}})
+    Object.assign(params, req.body.name && {name: {"$regex": new RegExp(req.body.name, "i")}})
     Object.assign(params, req.body.phone && {phone: {"$regex": req.body.phone}})
     Object.assign(params, req.body.email && {email: {"$regex": req.body.email}})
     const persons = await Person.find(params)
