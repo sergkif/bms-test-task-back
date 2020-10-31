@@ -9,6 +9,7 @@ router.post('/persons', async(req, res) => {
     Object.assign(params, req.body.name && {name: {"$regex": new RegExp(req.body.name, "i")}})
     Object.assign(params, req.body.phone && {phone: {"$regex": req.body.phone}})
     Object.assign(params, req.body.email && {email: {"$regex": req.body.email}})
+    Object.assign(params, req.body.birth && {birth: {"$regex": req.body.birth}})
     const persons = await Person.find(params)
     res.status(200).send(persons)
   } catch(error) {
