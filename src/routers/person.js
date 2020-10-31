@@ -18,7 +18,7 @@ router.post('/persons', async(req, res) => {
 
 router.get('/persons/:id', async(req, res) => {
   try {
-    const person = await Person.find({_id: req.params.id})
+    const person = await Person.findOne({_id: req.params.id})
     res.status(200).send(person)
   } catch(error) {
     res.status(404).send(error)
